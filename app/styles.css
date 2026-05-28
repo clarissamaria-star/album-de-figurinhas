@@ -1588,19 +1588,14 @@ h4 {
     gap: 8px;
   }
 
-  /* Modal mobile — flex ancora no fundo */
-  .overlay.is-visible {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: stretch;
+  /* Modal mobile — ancora no fundo, sem margens laterais */
+  .overlay {
     padding: 0;
+    align-items: flex-end;
   }
 
   .album-modal {
     width: 100%;
-    /* Ocupa quase toda a tela menos o bottom nav */
-    height: calc(100dvh - var(--mobile-nav-h));
     max-height: calc(100dvh - var(--mobile-nav-h));
     border-radius: 16px 16px 0 0;
   }
