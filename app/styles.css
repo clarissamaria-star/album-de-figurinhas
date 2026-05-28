@@ -233,7 +233,6 @@ button {
 
 .album-modal {
   width: min(430px, calc(100vw - 34px));
-  /* Altura máxima com scroll interno */
   max-height: calc(100dvh - 34px);
   display: flex;
   flex-direction: column;
@@ -243,19 +242,20 @@ button {
   box-shadow: 0 24px 90px rgba(0, 0, 0, 0.58);
 }
 
-/* Painel do modal com scroll */
+/* Painel do modal — scroll interno */
 .tab-panel.is-active {
   display: block;
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
-  max-height: calc(100dvh - 34px - 60px - 50px - 220px);
-  /* 34px overlay padding, 60px header, 50px tabs, 220px hero */
   -webkit-overflow-scrolling: touch;
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 .album-header {
   height: 60px;
+  flex-shrink: 0; /* não encolhe no flex do modal */
   display: grid;
   grid-template-columns: 44px 1fr 44px;
   align-items: center;
@@ -285,6 +285,7 @@ button {
 
 .tabs {
   height: 50px;
+  flex-shrink: 0; /* não encolhe no flex do modal */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   background: #242742;
@@ -321,6 +322,7 @@ button {
 
 .album-hero {
   position: relative;
+  flex-shrink: 0; /* não encolhe no flex do modal */
   min-height: 220px;
   display: flex;
   align-items: center;
@@ -1586,40 +1588,72 @@ h4 {
     gap: 8px;
   }
 
-  /* Modal ocupa quase tela toda no mobile */
+  /* Modal mobile — ancora no fundo, sem margens laterais */
   .overlay {
     padding: 0;
-    align-items: flex-end; /* desliza de baixo para cima */
+    align-items: flex-end;
   }
 
   .album-modal {
-    width: 100vw;
+    width: 100%;
     max-height: calc(100dvh - var(--mobile-nav-h));
-    border-radius: var(--modal-radius) var(--modal-radius) 0 0;
+    border-radius: 16px 16px 0 0;
   }
 
-  .tab-panel.is-active {
-    max-height: calc(100dvh - var(--mobile-nav-h) - 60px - 50px - 220px);
+  /* Tabs: sem ícone, letra menor para caber os 3 */
+  .tab-icon {
+    display: none;
   }
 
-  /* Hero menor no mobile */
+  .tab {
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    padding: 0 4px;
+  }
+
+  /* Hero mobile: texto à esquerda, mascote só decorativo atrás */
   .album-hero {
-    min-height: 180px;
-    padding: 22px 16px;
+    min-height: 140px;
+    max-height: 140px;
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 3;
+    max-width: 68%; /* deixa espaço para o mascote sem sobrepor */
   }
 
   .hero-copy h2 {
-    font-size: 26px;
+    font-size: 20px;
+    line-height: 1;
+    margin-bottom: 6px;
   }
 
   .hero-copy p {
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.3;
+    /* limita em 3 linhas */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
+  /* Mascote: posicionado no canto direito, menor, não sobrepõe texto */
   .mascote-img {
-    width: 148px;
-    right: -8px;
-    top: 0;
+    position: absolute;
+    right: -10px;
+    bottom: -6px;
+    top: auto;
+    width: 120px;
+    opacity: 0.92;
+  }
+
+  /* Pacotinho: esconde no mobile para não poluir */
+  .floating-pack {
+    display: none;
   }
 
   /* Bottom navigation */
