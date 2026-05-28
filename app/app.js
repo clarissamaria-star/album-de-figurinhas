@@ -19,6 +19,7 @@ const prevPage = document.querySelector("#prevPage");
 const nextPage = document.querySelector("#nextPage");
 const albumOwnedCounter = document.querySelector("#albumOwnedCounter");
 const albumProgressBar = document.querySelector("#albumProgressBar");
+const pageTurn = document.querySelector("#pageTurn");
 
 const bronzeNames = [
   "Atlanta", "Boston", "Cidade do Mexico", "Dallas", "Guadalajara", "Houston", "Kansas City", "Los Angeles", "Miami",
@@ -83,6 +84,7 @@ const pageThemes = [
 ];
 
 let currentPage = 0;
+let flipTimer = null;
 
 function openAlbum() {
   albumOverlay.classList.add("is-visible");
@@ -104,6 +106,10 @@ function closeMissionDetail() {
 
 openAlbumFromMenu.addEventListener("click", openAlbum);
 closeAlbum.addEventListener("click", closeAlbumModal);
+
+// Bottom nav mobile — botão do álbum
+const openAlbumMobile = document.querySelector("#openAlbumMobile");
+if (openAlbumMobile) openAlbumMobile.addEventListener("click", openAlbum);
 openSportsMission.addEventListener("click", openMissionDetail);
 closeMission.addEventListener("click", closeMissionDetail);
 
@@ -118,12 +124,21 @@ tabs.forEach((tab) => {
 checkinGrid.innerHTML = Array.from({ length: 16 }, (_, index) => {
   const day = index + 1;
   const status = index === 0 ? "claimed" : index === 1 ? "available" : "locked";
-  const label = { claimed: "Resgatado", available: "Resgatar", locked: "Bloqueado" }[status];
+  const reward = day === 16 ? "Bônus especial" : "Figurinhas bônus";
+  const rarity = [4, 8, 12, 16].includes(day) ? "Ouro" : [6, 10, 14].includes(day) ? "Prata" : "Bronze";
+  const label = { claimed: "Resgatado", available: "Disponível", locked: "Bloqueado" }[status];
 
   return `
     <article class="day-card ${status}">
-      <strong>Dia ${day}</strong>
-      <span>${label}</span>
+      <div class="checkin-reward-art rarity-${rarity.toLowerCase()}">
+        <span>${day}</span>
+      </div>
+      <div class="checkin-copy">
+        <strong>Check-in ${day}</strong>
+        <span>${reward}</span>
+        <small>${rarity} · 01 figurinha</small>
+      </div>
+      <div class="checkin-status">${label}</div>
     </article>
   `;
 }).join("");
@@ -163,8 +178,23 @@ function renderAlbumPage() {
   }).join("");
 }
 
-function setAlbumPage(page) {
-  currentPage = Math.max(0, Math.min(16, Number(page)));
+function playPageTurn(nextPageNumber) {
+  const next = Math.max(0, Math.min(16, Number(nextPageNumber)));
+  if (next === currentPage) return;
+
+  pageTurn.className = "page-turn";
+  pageTurn.classList.add(next > currentPage ? "turn-forward" : "turn-backward");
+
+  window.clearTimeout(flipTimer);
+  flipTimer = window.setTimeout(() => {
+    pageTurn.className = "page-turn";
+  }, 720);
+}
+
+function setAlbumPage(page, animate = true) {
+  const next = Math.max(0, Math.min(16, Number(page)));
+  if (animate) playPageTurn(next);
+  currentPage = next;
   renderAlbumPage();
 }
 
