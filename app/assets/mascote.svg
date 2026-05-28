@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 200" fill="none">
+  <!-- Sombra -->
+  <ellipse cx="80" cy="192" rx="36" ry="7" fill="rgba(0,0,0,0.28)"/>
+
+  <!-- Cauda enrolada -->
+  <path d="M110 158 C130 155 138 140 132 128 C126 116 112 118 108 128 C104 138 112 144 118 140"
+        stroke="#5a8a3a" stroke-width="9" stroke-linecap="round" fill="none"/>
+  <path d="M110 158 C130 155 138 140 132 128 C126 116 112 118 108 128 C104 138 112 144 118 140"
+        stroke="#7ab84e" stroke-width="5" stroke-linecap="round" fill="none"/>
+
+  <!-- Pernas -->
+  <ellipse cx="56" cy="175" rx="14" ry="10" fill="#4a7a2e"/>
+  <ellipse cx="104" cy="175" rx="14" ry="10" fill="#4a7a2e"/>
+  <!-- Garras -->
+  <circle cx="48" cy="181" r="4" fill="#3a6020"/>
+  <circle cx="56" cy="183" r="4" fill="#3a6020"/>
+  <circle cx="64" cy="181" r="4" fill="#3a6020"/>
+  <circle cx="96" cy="181" r="4" fill="#3a6020"/>
+  <circle cx="104" cy="183" r="4" fill="#3a6020"/>
+  <circle cx="112" cy="181" r="4" fill="#3a6020"/>
+
+  <!-- Corpo base -->
+  <ellipse cx="80" cy="148" rx="46" ry="36" fill="#5a8a3a"/>
+
+  <!-- Carapaça — placas hexagonais estilo tatu-bola -->
+  <ellipse cx="80" cy="130" rx="44" ry="50" fill="#4a7a2e"/>
+
+  <!-- Faixas da carapaça -->
+  <path d="M38 118 Q80 108 122 118" stroke="#3a6020" stroke-width="2.5" fill="none"/>
+  <path d="M36 130 Q80 119 124 130" stroke="#3a6020" stroke-width="2.5" fill="none"/>
+  <path d="M38 142 Q80 132 122 142" stroke="#3a6020" stroke-width="2.5" fill="none"/>
+  <path d="M44 154 Q80 146 116 154" stroke="#3a6020" stroke-width="2" fill="none"/>
+
+  <!-- Detalhes verdes vibrantes (Sabiá Gaming) -->
+  <path d="M50 118 Q80 112 110 118 Q80 108 50 118Z" fill="#e4ff15" opacity="0.18"/>
+  <path d="M48 130 Q80 123 112 130 Q80 120 48 130Z" fill="#38d7b4" opacity="0.14"/>
+
+  <!-- Linhas verticais da carapaça -->
+  <path d="M62 85 Q60 120 58 155" stroke="#3a6020" stroke-width="1.8" fill="none"/>
+  <path d="M80 82 Q80 120 80 157" stroke="#3a6020" stroke-width="1.8" fill="none"/>
+  <path d="M98 85 Q100 120 102 155" stroke="#3a6020" stroke-width="1.8" fill="none"/>
+
+  <!-- Cabeça -->
+  <ellipse cx="80" cy="90" rx="34" ry="30" fill="#7ab84e"/>
+  <!-- Topo da cabeça (carapaça) -->
+  <ellipse cx="80" cy="76" rx="30" ry="18" fill="#4a7a2e"/>
+  <path d="M52 76 Q80 68 108 76" stroke="#3a6020" stroke-width="2" fill="none"/>
+  <path d="M56 84 Q80 76 104 84" stroke="#3a6020" stroke-width="1.5" fill="none"/>
+
+  <!-- Orelhas -->
+  <ellipse cx="50" cy="72" rx="9" ry="13" fill="#4a7a2e" transform="rotate(-15 50 72)"/>
+  <ellipse cx="110" cy="72" rx="9" ry="13" fill="#4a7a2e" transform="rotate(15 110 72)"/>
+  <ellipse cx="50" cy="72" rx="5" ry="8" fill="#7ab84e" transform="rotate(-15 50 72)"/>
+  <ellipse cx="110" cy="72" rx="5" ry="8" fill="#7ab84e" transform="rotate(15 110 72)"/>
+
+  <!-- Rosto -->
+  <!-- Olhos brancos -->
+  <ellipse cx="66" cy="94" rx="11" ry="12" fill="white"/>
+  <ellipse cx="94" cy="94" rx="11" ry="12" fill="white"/>
+  <!-- Íris verde-limão (cor da Sabiá) -->
+  <circle cx="67" cy="95" r="7" fill="#e4ff15"/>
+  <circle cx="93" cy="95" r="7" fill="#e4ff15"/>
+  <!-- Pupila -->
+  <circle cx="68" cy="95" r="4" fill="#1a1a2e"/>
+  <circle cx="94" cy="95" r="4" fill="#1a1a2e"/>
+  <!-- Brilho do olho -->
+  <circle cx="70" cy="92" r="1.8" fill="white"/>
+  <circle cx="96" cy="92" r="1.8" fill="white"/>
+
+  <!-- Nariz -->
+  <ellipse cx="80" cy="105" rx="8" ry="5" fill="#3a6020"/>
+  <ellipse cx="77" cy="104" rx="3" ry="2" fill="#2a4a18"/>
+  <ellipse cx="83" cy="104" rx="3" ry="2" fill="#2a4a18"/>
+
+  <!-- Sorriso -->
+  <path d="M68 112 Q80 122 92 112" stroke="#2a4a18" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Bigodes -->
+  <line x1="56" y1="107" x2="70" y2="108" stroke="#2a4a18" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="56" y1="111" x2="70" y2="110" stroke="#2a4a18" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="90" y1="108" x2="104" y2="107" stroke="#2a4a18" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="90" y1="110" x2="104" y2="111" stroke="#2a4a18" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Braço esquerdo segurando figurinha -->
+  <path d="M38 140 Q22 130 20 116" stroke="#5a8a3a" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <path d="M38 140 Q22 130 20 116" stroke="#7ab84e" stroke-width="7" stroke-linecap="round" fill="none"/>
+
+  <!-- Figurinha na mão -->
+  <rect x="6" y="96" width="22" height="28" rx="3" fill="#e4ff15" stroke="#c8d900" stroke-width="1.5"/>
+  <rect x="9" y="99" width="16" height="16" rx="2" fill="#38d7b4"/>
+  <text x="17" y="109" font-family="Arial" font-size="7" font-weight="900" fill="#080a16" text-anchor="middle">SG</text>
+  <rect x="9" y="117" width="16" height="4" rx="1" fill="#080a16" opacity="0.3"/>
+
+  <!-- Braço direito -->
+  <path d="M122 140 Q138 130 140 116" stroke="#5a8a3a" stroke-width="12" stroke-linecap="round" fill="none"/>
+  <path d="M122 140 Q138 130 140 116" stroke="#7ab84e" stroke-width="7" stroke-linecap="round" fill="none"/>
+
+  <!-- Mão direita fazendo joinha -->
+  <ellipse cx="142" cy="112" rx="10" ry="12" fill="#7ab84e"/>
+  <!-- Polegar -->
+  <ellipse cx="134" cy="107" rx="5" ry="7" fill="#7ab84e" transform="rotate(-30 134 107)"/>
+
+  <!-- Faixa verde-amarela no corpo (Copa Brasil) -->
+  <path d="M46 148 Q80 142 114 148" stroke="#e4ff15" stroke-width="3" fill="none" opacity="0.6"/>
+</svg>

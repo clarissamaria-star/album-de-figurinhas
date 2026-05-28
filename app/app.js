@@ -1,0 +1,182 @@
+const albumOverlay = document.querySelector("#albumOverlay");
+const missionOverlay = document.querySelector("#missionOverlay");
+const openAlbumFromMenu = document.querySelector("#openAlbumFromMenu");
+const closeAlbum = document.querySelector("#closeAlbum");
+const openSportsMission = document.querySelector("#openSportsMission");
+const closeMission = document.querySelector("#closeMission");
+const tabs = document.querySelectorAll(".tab");
+const panels = document.querySelectorAll(".tab-panel");
+const checkinGrid = document.querySelector("#checkinGrid");
+const albumCover = document.querySelector("#albumCover");
+const albumPage = document.querySelector("#albumPage");
+const pageStickers = document.querySelector("#pageStickers");
+const pageBrand = document.querySelector("#pageBrand");
+const pageProvider = document.querySelector("#pageProvider");
+const pageRange = document.querySelector("#pageRange");
+const pageLabel = document.querySelector("#pageLabel");
+const pageSlider = document.querySelector("#pageSlider");
+const prevPage = document.querySelector("#prevPage");
+const nextPage = document.querySelector("#nextPage");
+const albumOwnedCounter = document.querySelector("#albumOwnedCounter");
+const albumProgressBar = document.querySelector("#albumProgressBar");
+
+const bronzeNames = [
+  "Atlanta", "Boston", "Cidade do Mexico", "Dallas", "Guadalajara", "Houston", "Kansas City", "Los Angeles", "Miami",
+  "Monterrey", "Filadelfia", "Sao Francisco", "Seattle", "Toronto", "Vancouver", "New York",
+];
+
+const silverNames = [
+  "Uniforme Africa do Sul", "Bandeira Africa do Sul", "Bandeira Arabia Saudita", "Uniforme Arabia Saudita",
+  "Bandeira Argelia", "Uniforme Argelia", "Bandeira Australia", "Uniforme Australia", "Bandeira Austria",
+  "Uniforme Austria", "Bandeira Belgica", "Uniforme Belgica", "Bandeira Bosnia", "Uniforme Bosnia",
+  "Bandeira Cabo Verde", "Uniforme Cabo Verde", "Uniforme Campea 1", "Uniforme Campea 2", "Uniforme Campea 3",
+  "Uniforme Campea 4", "Uniforme Campea 5", "Uniforme Campea 6", "Bandeira Canada", "Uniforme Canada",
+  "Bandeira Catar", "Uniforme Catar", "Bandeira Colombia", "Uniforme Colombia", "Bandeira Coreia do Sul",
+  "Uniforme Coreia do Sul", "Bandeira Costa do Marfim", "Uniforme Costa do Marfim", "Bandeira Croacia",
+  "Uniforme Croacia", "Bandeira Curacao", "Uniforme Curacao", "Bandeira Egito", "Uniforme Egito",
+  "Bandeira Equador", "Uniforme Equador", "Bandeira Escocia", "Uniforme Escocia", "Bandeira Estados Unidos",
+  "Uniforme Estados Unidos", "Bandeira Gana", "Uniforme Gana", "Bandeira Haiti", "Uniforme Haiti",
+  "Bandeira Holanda", "Uniforme Holanda", "Bandeira Ira", "Uniforme Ira", "Bandeira Iraque", "Uniforme Iraque",
+  "Bandeira Japao", "Uniforme Japao", "Bandeira Jordania", "Uniforme Jordania", "Bandeira Marrocos",
+  "Uniforme Marrocos", "Bandeira Mexico", "Uniforme Mexico", "Bandeira Noruega", "Uniforme Noruega",
+  "Bandeira Nova Zelandia", "Uniforme Nova Zelandia", "Bandeira Panama", "Uniforme Panama", "Bandeira Paraguai",
+  "Uniforme Paraguai", "Bandeira Portugal", "Uniforme Portugal", "Bandeira RD Congo", "Uniforme RD Congo",
+  "Bandeira Rep. Tcheca", "Uniforme Rep. Tcheca", "Bandeira Senegal", "Uniforme Senegal", "Bandeira Suecia",
+  "Uniforme Suecia", "Bandeira Suica", "Uniforme Suica", "Bandeira Tunisia", "Uniforme Tunisia",
+  "Bandeira Turquia", "Uniforme Turquia", "Bandeira Uzbequistao", "Uniforme Uzbequistao", "Uniforme Inglaterra",
+];
+
+const goldNames = ["Alemanha", "Argentina", "Brasil", "Espanha", "Franca", "Inglaterra", "Uruguai", "Especial Sabia"];
+const diamondNames = ["Diamante 1", "Diamante 2", "Diamante 3", "Diamante 4", "Diamante 5"];
+
+const stickers = [
+  ...bronzeNames.map((name, index) => ({ id: `B-${String(index + 1).padStart(3, "0")}`, name, rarity: "Bronze", owned: name === "Guadalajara" })),
+  ...silverNames.map((name, index) => ({ id: `S-${String(index + 1).padStart(3, "0")}`, name, rarity: "Prata", owned: false })),
+  ...goldNames.map((name, index) => ({ id: `G-${String(index + 1).padStart(3, "0")}`, name, rarity: "Ouro", owned: false })),
+  ...diamondNames.map((name, index) => ({ id: `D-${String(index + 1).padStart(3, "0")}`, name, rarity: "Diamante", owned: false })),
+];
+
+const rarityColors = {
+  Bronze: "#cd7f32",
+  Prata: "#cfd5df",
+  Ouro: "#ffd65a",
+  Diamante: "#86eaff",
+};
+
+const pageThemes = [
+  { brand: "Copa 2026", theme: "stadium", provider: "" },
+  { brand: "Tatu do Bem", theme: "party", provider: "PopOK" },
+  { brand: "Spaceman", theme: "space", provider: "Pragmatic Play" },
+  { brand: "Soccer Strike", theme: "strike", provider: "Games Global" },
+  { brand: "Ronaldinho Streetball", theme: "street", provider: "Booming Games" },
+  { brand: "JetX", theme: "jetx", provider: "SmartSoft Gaming" },
+  { brand: "Gates of Olympus", theme: "olympus", provider: "SmartSoft Gaming" },
+  { brand: "Football X", theme: "footballx", provider: "SmartSoft Gaming" },
+  { brand: "Duck Hunters", theme: "duck", provider: "Evolution" },
+  { brand: "Big Bass Bonanza", theme: "bass", provider: "Pragmatic Play" },
+  { brand: "Brasil", theme: "stadium", provider: "" },
+  { brand: "Mundo", theme: "space", provider: "" },
+  { brand: "Ouro", theme: "party", provider: "" },
+  { brand: "Diamantes", theme: "strike", provider: "" },
+  { brand: "Finais", theme: "street", provider: "" },
+  { brand: "Completar Album", theme: "stadium", provider: "" },
+];
+
+let currentPage = 0;
+
+function openAlbum() {
+  albumOverlay.classList.add("is-visible");
+}
+
+function closeAlbumModal() {
+  albumOverlay.classList.remove("is-visible");
+}
+
+function openMissionDetail() {
+  missionOverlay.classList.add("is-visible");
+  missionOverlay.setAttribute("aria-hidden", "false");
+}
+
+function closeMissionDetail() {
+  missionOverlay.classList.remove("is-visible");
+  missionOverlay.setAttribute("aria-hidden", "true");
+}
+
+openAlbumFromMenu.addEventListener("click", openAlbum);
+closeAlbum.addEventListener("click", closeAlbumModal);
+openSportsMission.addEventListener("click", openMissionDetail);
+closeMission.addEventListener("click", closeMissionDetail);
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const target = tab.dataset.tab;
+    tabs.forEach((item) => item.classList.toggle("is-active", item === tab));
+    panels.forEach((panel) => panel.classList.toggle("is-active", panel.id === target));
+  });
+});
+
+checkinGrid.innerHTML = Array.from({ length: 16 }, (_, index) => {
+  const day = index + 1;
+  const status = index === 0 ? "claimed" : index === 1 ? "available" : "locked";
+  const label = { claimed: "Resgatado", available: "Resgatar", locked: "Bloqueado" }[status];
+
+  return `
+    <article class="day-card ${status}">
+      <strong>Dia ${day}</strong>
+      <span>${label}</span>
+    </article>
+  `;
+}).join("");
+
+function renderAlbumPage() {
+  const owned = stickers.filter((item) => item.owned).length;
+  albumOwnedCounter.textContent = `${owned}/141`;
+  albumProgressBar.style.width = `${Math.max(1, Math.round((owned / 141) * 100))}%`;
+  pageSlider.value = String(currentPage);
+  pageLabel.textContent = `Página ${currentPage} de 16`;
+  prevPage.disabled = currentPage === 0;
+  nextPage.disabled = currentPage === 16;
+
+  albumCover.classList.toggle("is-active", currentPage === 0);
+  albumPage.classList.toggle("is-active", currentPage > 0);
+
+  if (currentPage === 0) return;
+
+  const pageIndex = currentPage - 1;
+  const start = pageIndex * 9;
+  const pageItems = stickers.slice(start, start + 9);
+  const theme = pageThemes[pageIndex] || pageThemes[0];
+
+  albumPage.className = `album-page sticker-page is-active theme-${theme.theme}`;
+  pageBrand.textContent = theme.brand;
+  pageProvider.textContent = theme.provider || "";
+  pageRange.textContent = `${start + 1}-${Math.min(start + pageItems.length, 141)} de 141`;
+  pageStickers.innerHTML = pageItems.map((item) => {
+    const rarityClass = item.rarity.toLowerCase();
+    return `
+      <article class="book-sticker ${item.owned ? "is-owned" : ""} rarity-${rarityClass}" style="--rarity-color: ${rarityColors[item.rarity]}">
+        <span class="rarity-code">${item.id.slice(0, 1)}-</span>
+        <div class="owned-art"></div>
+        <strong>${item.name}</strong>
+      </article>
+    `;
+  }).join("");
+}
+
+function setAlbumPage(page) {
+  currentPage = Math.max(0, Math.min(16, Number(page)));
+  renderAlbumPage();
+}
+
+pageSlider.addEventListener("input", (event) => setAlbumPage(event.target.value));
+prevPage.addEventListener("click", () => setAlbumPage(currentPage - 1));
+nextPage.addEventListener("click", () => setAlbumPage(currentPage + 1));
+
+document.addEventListener("keydown", (event) => {
+  const stickersOpen = document.querySelector("#stickers").classList.contains("is-active");
+  if (!stickersOpen) return;
+  if (event.key === "ArrowLeft") setAlbumPage(currentPage - 1);
+  if (event.key === "ArrowRight") setAlbumPage(currentPage + 1);
+});
+
+renderAlbumPage();

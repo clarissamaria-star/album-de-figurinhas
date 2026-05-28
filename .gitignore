@@ -1,0 +1,17 @@
+# Capturas, dumps e materiais de terceiros
+*.har
+*.zip
+saveweb2zip-*/
+*saveweb*
+
+# Segredos e sessao
+.env
+.env.*
+*.local
+session-data*
+private-keys*
+access-dumps*
+
+# Sistema/editor
+Thumbs.db
+.DS_Store

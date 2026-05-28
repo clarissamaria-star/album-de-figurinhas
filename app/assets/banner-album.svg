@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" role="img" aria-label="Banner album">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#7a350e"/>
+      <stop offset=".55" stop-color="#f0be18"/>
+      <stop offset="1" stop-color="#26a85b"/>
+    </linearGradient>
+    <radialGradient id="shine" cx=".72" cy=".32" r=".45">
+      <stop stop-color="#fff8a3" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#fff8a3" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="860" height="440" fill="url(#bg)"/>
+  <rect width="860" height="440" fill="url(#shine)"/>
+  <g transform="translate(610 42) rotate(8)">
+    <circle cx="86" cy="86" r="82" fill="#d18b4c"/>
+    <circle cx="58" cy="72" r="16" fill="#fff"/>
+    <circle cx="112" cy="72" r="16" fill="#fff"/>
+    <circle cx="62" cy="76" r="7" fill="#1c1020"/>
+    <circle cx="108" cy="76" r="7" fill="#1c1020"/>
+    <path d="M52 118c23 23 50 23 73 0" fill="none" stroke="#23121b" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(640 254) rotate(-11)">
+    <rect width="118" height="150" rx="10" fill="#e86f1f" stroke="#fff3bb" stroke-width="5"/>
+    <rect x="15" y="16" width="88" height="118" rx="7" fill="#96340e"/>
+    <text x="59" y="75" text-anchor="middle" fill="#e4ff15" font-family="Arial, sans-serif" font-size="25" font-weight="900">SABIÁ</text>
+    <text x="59" y="101" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="19" font-weight="900">PACK</text>
+  </g>
+</svg>

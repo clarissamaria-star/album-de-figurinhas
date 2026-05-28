@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Album de Figurinhas</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar">
+        <a class="logo-link" href="#" aria-label="Sabiá Gaming">
+          <img src="assets/logo.svg" alt="Sabiá Gaming">
+        </a>
+
+        <nav class="side-nav" aria-label="Menu principal">
+          <button class="side-item is-active" type="button" id="openAlbumFromMenu">
+            <span class="side-icon">▣</span>
+            <span>Álbum de Figurinhas</span>
+            <small>Novo</small>
+          </button>
+          <button class="side-item" type="button"><span class="side-icon">✦</span><span>Mini Games Diários</span></button>
+          <button class="side-item" type="button"><span class="side-icon">◎</span><span>Roleta Craque Neto</span></button>
+          <button class="side-item" type="button"><span class="side-icon">♙</span><span>Indique e Ganhe</span></button>
+          <button class="side-item" type="button"><span class="side-icon">◉</span><span>Missões</span></button>
+          <button class="side-item" type="button"><span class="side-icon">▤</span><span>Loja</span></button>
+        </nav>
+      </aside>
+
+      <main class="home">
+        <header class="topbar">
+          <div class="search">Buscar jogos, provedores, tags...</div>
+          <button class="deposit-button" type="button">Depositar</button>
+          <div class="wallet">R$ 0,00</div>
+        </header>
+
+        <section class="hero-banners" aria-label="Banners">
+          <article class="banner-card">Vem pra Sabiá</article>
+          <article class="banner-card featured">Figurinhas da Sabiá em campo!</article>
+          <article class="banner-card">Aposte na Diversão</article>
+        </section>
+
+        <section class="game-row">
+          <div class="row-title">Pagou muito</div>
+          <div class="game-cards">
+            <article>Fortune Rabbit <strong>Jogar</strong></article>
+            <article>Fortune Dragon <strong>Jogar</strong></article>
+            <article>Aviator <strong>Jogar</strong></article>
+            <article>Fortune Tiger <strong>Jogar</strong></article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="overlay is-visible" id="albumOverlay">
+      <section class="album-modal" aria-label="Álbum de figurinhas">
+        <header class="album-header">
+          <span></span>
+          <h1>Álbum Figurinhas 2026</h1>
+          <button class="icon-button" type="button" id="closeAlbum" aria-label="Fechar">×</button>
+        </header>
+
+        <nav class="tabs" aria-label="Áreas do álbum">
+          <button class="tab is-active" type="button" data-tab="missions">
+            <span class="tab-icon">◎</span>
+            Missões
+          </button>
+          <button class="tab" type="button" data-tab="checkin">
+            <span class="tab-icon">●</span>
+            Check-in
+          </button>
+          <button class="tab" type="button" data-tab="stickers">
+            <span class="tab-icon">▣</span>
+            Figurinhas
+          </button>
+        </nav>
+
+        <section class="album-hero">
+          <div class="hero-copy">
+            <h2>Missões álbum de figurinhas</h2>
+            <p>Conclua missões, receba cartas, preencha o seu álbum de figurinhas e ganhe diversos prêmios e recompensas.</p>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <img src="assets/mascote.svg" alt="" class="mascote-img">
+            <div class="floating-pack">
+              <strong>S</strong>
+              <small>PACK</small>
+            </div>
+          </div>
+        </section>
+
+        <div class="tab-panel is-active" id="missions">
+          <section class="rarity-section">
+            <div class="section-title">
+              <h3>Diamantes</h3>
+              <span class="info-dot">i</span>
+            </div>
+
+            <div class="milestones" aria-label="Metas de progresso">
+              <article class="milestone"><div class="sticker-card"></div><strong>20%</strong><span>Primeira conquista</span></article>
+              <article class="milestone"><div class="sticker-card"></div><strong>40%</strong><span>Em ritmo</span></article>
+              <article class="milestone"><div class="sticker-card"></div><strong>60%</strong><span>Acelerando</span></article>
+              <article class="milestone"><div class="sticker-card"></div><strong>80%</strong><span>Quase lá</span></article>
+              <article class="milestone"><div class="sticker-card"></div><strong>100%</strong><span>Álbum completo</span></article>
+            </div>
+
+            <div class="progress-row" aria-label="Progresso do álbum">
+              <div class="progress-track"><span style="width: 0%"></span></div>
+              <strong>0%</strong>
+            </div>
+          </section>
+
+          <section class="missions-section">
+            <div class="section-heading-row">
+              <h3>Suas missões</h3>
+              <p><strong>0 missões concluídas</strong><span>de 1 totais</span></p>
+            </div>
+
+            <button class="mission-card" type="button" id="openSportsMission">
+              <div class="mission-pack">
+                <strong>S</strong>
+                <small>PACK</small>
+              </div>
+              <div>
+                <h4>Evento esportivo</h4>
+                <p>01 pacote</p>
+              </div>
+            </button>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="checkin">
+          <section class="checkin-section">
+            <div class="section-heading-row">
+              <h3>Check-in diário</h3>
+              <p><strong>1 dia concluído</strong><span>de 16 dias</span></p>
+            </div>
+            <div class="checkin-grid" id="checkinGrid"></div>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="stickers">
+          <section class="stickers-section album-book-section">
+            <div class="album-progress-line">
+              <div class="progress-track"><span id="albumProgressBar" style="width: 1%"></span></div>
+              <strong id="albumOwnedCounter">1/141</strong>
+            </div>
+
+            <div class="album-page-shell">
+              <button class="grid-toggle" type="button" aria-label="Ver todas as páginas">▦</button>
+              <article class="album-page cover-page is-active" id="albumCover" aria-label="Capa do álbum">
+                <div class="cover-title">
+                  <strong>Album de</strong>
+                  <span>Figurinhas</span>
+                  <em>2026</em>
+                </div>
+                <div class="cover-player"></div>
+                <div class="cover-card cover-card-left"></div>
+                <div class="cover-card cover-card-right"></div>
+                <img src="assets/logo.svg" alt="" class="page-logo">
+              </article>
+
+              <article class="album-page sticker-page" id="albumPage" aria-live="polite">
+                <div class="page-brand" id="pageBrand"></div>
+                <div class="page-stickers" id="pageStickers"></div>
+                <span class="page-provider" id="pageProvider"></span>
+                <span class="page-range" id="pageRange">1-9 de 141</span>
+                <img src="assets/logo.svg" alt="" class="page-logo">
+              </article>
+            </div>
+
+            <div class="book-controls">
+              <input class="page-slider" id="pageSlider" type="range" min="0" max="16" value="0" aria-label="Página do álbum">
+              <div class="page-nav">
+                <button class="nav-button" type="button" id="prevPage" aria-label="Página anterior">‹</button>
+                <span id="pageLabel">Página 0 de 16</span>
+                <button class="nav-button" type="button" id="nextPage" aria-label="Próxima página">›</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <div class="overlay mission-overlay" id="missionOverlay" aria-hidden="true">
+      <section class="mission-detail" aria-label="Evento esportivo">
+        <button class="detail-close" type="button" id="closeMission" aria-label="Fechar">×</button>
+        <div class="detail-pack">
+          <strong>S</strong>
+          <small>FIGURINHAS</small>
+        </div>
+
+        <h2>Evento esportivo</h2>
+        <p class="detail-description">
+          Aposte R$ 10,00 ou mais em qualquer evento esportivo. Após sua aposta encerrar, você receberá a recompensa.
+        </p>
+
+        <dl class="mission-stats">
+          <div>
+            <dt>Recompensa</dt>
+            <dd>Um pacote de figurinhas</dd>
+          </div>
+          <div>
+            <dt>Progresso</dt>
+            <dd>Disponível agora</dd>
+          </div>
+          <div class="progress-stat">
+            <dt>Andamento</dt>
+            <dd>0%</dd>
+            <span class="detail-progress"><i style="width: 0%"></i></span>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd>Em andamento</dd>
+          </div>
+        </dl>
+
+        <a class="accept-button" href="/esportes">Desafio Aceito!</a>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

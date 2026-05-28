@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 70" role="img" aria-label="Sabiá Gaming">
+  <rect width="160" height="70" rx="12" fill="#171a31"/>
+  <path d="M27 46c10-24 31-34 63-28-16 5-26 14-30 28H27Z" fill="#e4ff15"/>
+  <path d="M59 47c8-17 23-24 46-20-11 4-18 10-21 20H59Z" fill="#38d7b4"/>
+  <text x="82" y="44" fill="#f8f8fb" font-family="Arial, sans-serif" font-size="19" font-weight="800">SABIÁ</text>
+</svg>
