@@ -1610,3 +1610,221 @@ h4 {
     width: 100%;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EFEITOS DE EXPERIÊNCIA
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Preferência do sistema: sem animações ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ── Check-in day cards ────────────────────────────────────────────────── */
+
+.day-card {
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+  cursor: default;
+}
+
+/* Disponível — levanta e brilha ao hover */
+.day-card.available {
+  cursor: pointer;
+}
+
+.day-card.available:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(183, 226, 91, 0.22),
+              0 2px 8px rgba(0, 0, 0, 0.3);
+  border-color: rgba(183, 226, 91, 0.85);
+}
+
+.day-card.available:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(183, 226, 91, 0.15);
+}
+
+/* Resgatado — glow de conquista */
+.day-card.claimed {
+  box-shadow: 0 0 0 1px rgba(223, 255, 25, 0.35),
+              0 4px 18px rgba(223, 255, 25, 0.12);
+}
+
+/* Badge de arte do pacotinho — brilho animado no claimed */
+.checkin-reward-art {
+  position: relative;
+  overflow: hidden;
+}
+
+.day-card.claimed .checkin-reward-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 80%
+  );
+  animation: shimmer 2.4s ease-in-out infinite;
+}
+
+/* Status badge — pop ao aparecer */
+.checkin-status {
+  animation: badgePop 300ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* ── Marcos de Diamante ────────────────────────────────────────────────── */
+
+.milestone {
+  transition: transform 150ms ease;
+}
+
+.milestone:hover {
+  transform: translateY(-3px);
+}
+
+.sticker-card {
+  transition: box-shadow 150ms ease;
+}
+
+.milestone:hover .sticker-card {
+  box-shadow: 0 0 18px rgba(255, 220, 80, 0.55);
+}
+
+/* ── Missão card ───────────────────────────────────────────────────────── */
+
+.mission-card {
+  transition: transform 130ms ease, box-shadow 130ms ease, filter 130ms ease;
+}
+
+.mission-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+  filter: brightness(1.1);
+}
+
+.mission-card:active {
+  transform: translateY(0);
+  filter: brightness(0.96);
+}
+
+/* ── Pacotinho flutuante ───────────────────────────────────────────────── */
+
+.floating-pack {
+  animation: floatPack 3.2s ease-in-out infinite;
+}
+
+/* ── Figurinhas (sticker grid) ─────────────────────────────────────────── */
+
+.album-sticker {
+  transition: transform 130ms ease, box-shadow 130ms ease;
+}
+
+.album-sticker:hover {
+  transform: scale(1.06);
+  z-index: 2;
+}
+
+.album-sticker.is-owned:hover {
+  box-shadow: 0 6px 20px rgba(223, 255, 25, 0.25);
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────────── */
+
+.tab {
+  transition: color 150ms ease;
+}
+
+.tab::after {
+  transition: opacity 150ms ease;
+}
+
+/* ── Botões de navegação do álbum ─────────────────────────────────────── */
+
+.nav-button {
+  transition: background 120ms ease, color 120ms ease, transform 100ms ease;
+}
+
+.nav-button:not(:disabled):hover {
+  background: #343752;
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.nav-button:not(:disabled):active {
+  transform: scale(0.95);
+}
+
+/* ── Accept button (missão) ───────────────────────────────────────────── */
+
+.accept-button {
+  transition: filter 130ms ease, transform 120ms ease, box-shadow 130ms ease;
+}
+
+.accept-button:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(223, 255, 25, 0.3);
+}
+
+.accept-button:active {
+  transform: translateY(0);
+  filter: brightness(0.96);
+}
+
+/* ── Barra de progresso animada ───────────────────────────────────────── */
+
+.progress-track span,
+.detail-progress i {
+  transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Bottom nav ───────────────────────────────────────────────────────── */
+
+.bottom-nav-item {
+  transition: color 130ms ease;
+}
+
+.bottom-nav-item:active {
+  transform: scale(0.9);
+  transition: transform 80ms ease;
+}
+
+/* ── Overlay — fade in ────────────────────────────────────────────────── */
+
+.overlay.is-visible {
+  animation: overlayIn 200ms ease both;
+}
+
+.album-modal {
+  animation: modalSlideUp 280ms cubic-bezier(0.34, 1.1, 0.64, 1) both;
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────────── */
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  60%  { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes floatPack {
+  0%, 100% { transform: rotate(-10deg) translateY(0); }
+  50%       { transform: rotate(-10deg) translateY(-6px); }
+}
+
+@keyframes badgePop {
+  from { transform: scale(0.8); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
