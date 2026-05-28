@@ -202,11 +202,55 @@ pageSlider.addEventListener("input", (event) => setAlbumPage(event.target.value)
 prevPage.addEventListener("click", () => setAlbumPage(currentPage - 1));
 nextPage.addEventListener("click", () => setAlbumPage(currentPage + 1));
 
+// Teclado: setas esquerda/direita
 document.addEventListener("keydown", (event) => {
   const stickersOpen = document.querySelector("#stickers").classList.contains("is-active");
   if (!stickersOpen) return;
-  if (event.key === "ArrowLeft") setAlbumPage(currentPage - 1);
+  if (event.key === "ArrowLeft")  setAlbumPage(currentPage - 1);
   if (event.key === "ArrowRight") setAlbumPage(currentPage + 1);
 });
+
+// Scroll do mouse sobre o álbum
+const albumShell = document.querySelector(".album-page-shell");
+let wheelTimer = null;
+albumShell.addEventListener("wheel", (event) => {
+  event.preventDefault();
+  clearTimeout(wheelTimer);
+  wheelTimer = setTimeout(() => {
+    if (event.deltaY > 0 || event.deltaX > 0) setAlbumPage(currentPage + 1);
+    else                                       setAlbumPage(currentPage - 1);
+  }, 60);
+}, { passive: false });
+
+// Clique na metade esquerda/direita da página para navegar
+albumShell.addEventListener("click", (event) => {
+  // ignora cliques nos botões de controle
+  if (event.target.closest(".nav-button, .page-slider, .grid-toggle")) return;
+  const rect = albumShell.getBoundingClientRect();
+  const mid  = rect.left + rect.width / 2;
+  if (event.clientX < mid) setAlbumPage(currentPage - 1);
+  else                      setAlbumPage(currentPage + 1);
+});
+
+// Swipe touch (mobile)
+let touchStartX = 0;
+let touchStartY = 0;
+albumShell.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+albumShell.addEventListener("touchend", (e) => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  // Só ativa se for swipe horizontal (dx > dy)
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+    if (dx < 0) setAlbumPage(currentPage + 1); // swipe left = próxima
+    else        setAlbumPage(currentPage - 1); // swipe right = anterior
+  }
+}, { passive: true });
+
+// Cursor de mão ao passar pelo álbum
+albumShell.style.cursor = "pointer";
 
 renderAlbumPage();

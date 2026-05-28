@@ -1410,16 +1410,17 @@ h4 {
 }
 
 .nav-button {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 50%;
   color: #bfc7db;
   background: #242742;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1;
+  cursor: pointer;
 }
 
 .nav-button:last-child {
