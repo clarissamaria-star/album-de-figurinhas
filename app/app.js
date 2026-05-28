@@ -188,7 +188,7 @@ function playPageTurn(nextPageNumber) {
   window.clearTimeout(flipTimer);
   flipTimer = window.setTimeout(() => {
     pageTurn.className = "page-turn";
-  }, 720);
+  }, 500);
 }
 
 function setAlbumPage(page, animate = true) {
@@ -210,27 +210,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight") setAlbumPage(currentPage + 1);
 });
 
-// Scroll do mouse sobre o álbum
 const albumShell = document.querySelector(".album-page-shell");
-let wheelTimer = null;
-albumShell.addEventListener("wheel", (event) => {
-  event.preventDefault();
-  clearTimeout(wheelTimer);
-  wheelTimer = setTimeout(() => {
-    if (event.deltaY > 0 || event.deltaX > 0) setAlbumPage(currentPage + 1);
-    else                                       setAlbumPage(currentPage - 1);
-  }, 60);
-}, { passive: false });
-
-// Clique na metade esquerda/direita da página para navegar
-albumShell.addEventListener("click", (event) => {
-  // ignora cliques nos botões de controle
-  if (event.target.closest(".nav-button, .page-slider, .grid-toggle")) return;
-  const rect = albumShell.getBoundingClientRect();
-  const mid  = rect.left + rect.width / 2;
-  if (event.clientX < mid) setAlbumPage(currentPage - 1);
-  else                      setAlbumPage(currentPage + 1);
-});
 
 // Swipe touch (mobile)
 let touchStartX = 0;
@@ -250,7 +230,5 @@ albumShell.addEventListener("touchend", (e) => {
   }
 }, { passive: true });
 
-// Cursor de mão ao passar pelo álbum
-albumShell.style.cursor = "pointer";
 
 renderAlbumPage();

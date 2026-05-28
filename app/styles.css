@@ -982,11 +982,11 @@ h4 {
 }
 
 .page-turn.turn-forward::before {
-  animation: pageFlipForward 700ms cubic-bezier(0.2, 0.72, 0.24, 1) both;
+  animation: pageFlipForward 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .page-turn.turn-forward::after {
-  animation: pageSheenForward 700ms cubic-bezier(0.2, 0.72, 0.24, 1) both;
+  animation: pageSheenForward 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .page-turn.turn-backward::before,
@@ -998,83 +998,79 @@ h4 {
 }
 
 .page-turn.turn-backward::before {
-  animation: pageFlipBackward 700ms cubic-bezier(0.2, 0.72, 0.24, 1) both;
+  animation: pageFlipBackward 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .page-turn.turn-backward::after {
-  animation: pageSheenBackward 700ms cubic-bezier(0.2, 0.72, 0.24, 1) both;
+  animation: pageSheenBackward 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Página em si — fade + deslize suave */
+.album-page.is-active {
+  animation: pageReveal 360ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes pageReveal {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes pageFlipForward {
   0% {
     opacity: 0;
-    transform: rotateY(0deg) skewY(0deg);
     clip-path: polygon(100% 0, 100% 100%, 100% 100%, 100% 0);
   }
-  12% {
+  10% {
     opacity: 1;
-    clip-path: polygon(18% 0, 100% 0, 100% 100%, 8% 100%);
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 22% 100%);
   }
-  50% {
-    transform: rotateY(-58deg) skewY(-1deg);
-    clip-path: polygon(0 0, 100% 4%, 92% 96%, 0 100%);
+  60% {
+    transform: rotateY(-32deg);
+    clip-path: polygon(0 0, 100% 2%, 94% 98%, 0 100%);
   }
   100% {
     opacity: 0;
-    transform: rotateY(-138deg) skewY(-2deg);
-    clip-path: polygon(0 0, 28% 0, 18% 100%, 0 100%);
+    transform: rotateY(-90deg);
+    clip-path: polygon(0 0, 18% 0, 12% 100%, 0 100%);
   }
 }
 
 @keyframes pageSheenForward {
-  0%, 100% {
-    opacity: 0;
-    transform: translateX(0) rotateY(0deg);
-  }
-  36% {
-    opacity: 0.92;
-    transform: translateX(-34px) rotateY(-38deg);
-  }
-  68% {
-    opacity: 0.55;
-    transform: translateX(-132px) rotateY(-72deg);
-  }
+  0%, 100% { opacity: 0; }
+  30%       { opacity: 0.45; transform: translateX(-20px); }
+  65%       { opacity: 0.2;  transform: translateX(-80px); }
 }
 
 @keyframes pageFlipBackward {
   0% {
     opacity: 0;
-    transform: rotateY(0deg) skewY(0deg);
     clip-path: polygon(0 0, 0 100%, 0 100%, 0 0);
   }
-  12% {
+  10% {
     opacity: 1;
-    clip-path: polygon(0 0, 82% 0, 92% 100%, 0 100%);
+    clip-path: polygon(0 0, 70% 0, 78% 100%, 0 100%);
   }
-  50% {
-    transform: rotateY(58deg) skewY(1deg);
-    clip-path: polygon(0 4%, 100% 0, 100% 100%, 8% 96%);
+  60% {
+    transform: rotateY(32deg);
+    clip-path: polygon(0 2%, 100% 0, 100% 100%, 6% 98%);
   }
   100% {
     opacity: 0;
-    transform: rotateY(138deg) skewY(2deg);
-    clip-path: polygon(72% 0, 100% 0, 100% 100%, 82% 100%);
+    transform: rotateY(90deg);
+    clip-path: polygon(82% 0, 100% 0, 100% 100%, 88% 100%);
   }
 }
 
 @keyframes pageSheenBackward {
-  0%, 100% {
-    opacity: 0;
-    transform: translateX(0) rotateY(0deg);
-  }
-  36% {
-    opacity: 0.92;
-    transform: translateX(34px) rotateY(38deg);
-  }
-  68% {
-    opacity: 0.55;
-    transform: translateX(132px) rotateY(72deg);
-  }
+  0%, 100% { opacity: 0; }
+  30%       { opacity: 0.45; transform: translateX(20px); }
+  65%       { opacity: 0.2;  transform: translateX(80px); }
 }
 
 .cover-page {
