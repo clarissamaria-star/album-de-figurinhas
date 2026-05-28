@@ -188,7 +188,7 @@ function playPageTurn(nextPageNumber) {
   window.clearTimeout(flipTimer);
   flipTimer = window.setTimeout(() => {
     pageTurn.className = "page-turn";
-  }, 500);
+  }, 700);
 }
 
 function setAlbumPage(page, animate = true) {
@@ -211,6 +211,12 @@ document.addEventListener("keydown", (event) => {
 });
 
 const albumShell = document.querySelector(".album-page-shell");
+
+// Cantos interativos de virada
+const cornerNext = document.querySelector("#cornerNext");
+const cornerPrev = document.querySelector("#cornerPrev");
+if (cornerNext) cornerNext.addEventListener("click", () => setAlbumPage(currentPage + 1));
+if (cornerPrev) cornerPrev.addEventListener("click", () => setAlbumPage(currentPage - 1));
 
 // Swipe touch (mobile)
 let touchStartX = 0;

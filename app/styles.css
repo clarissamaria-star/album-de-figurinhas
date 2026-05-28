@@ -934,6 +934,64 @@ h4 {
   display: block;
 }
 
+/* ── Cantos interativos de virada ──────────────────────────────────────── */
+.page-corner {
+  position: absolute;
+  bottom: 0;
+  z-index: 8;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  background: transparent;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E👆%3C/text%3E%3C/svg%3E") 8 0, pointer;
+  outline: none;
+  /* Dobra de canto sutil ao hover */
+  transition: opacity 200ms;
+}
+
+.page-corner--next {
+  right: 0;
+  clip-path: polygon(100% 60%, 100% 100%, 40% 100%);
+}
+
+.page-corner--prev {
+  left: 0;
+  clip-path: polygon(0% 60%, 60% 100%, 0% 100%);
+}
+
+/* Indicador visual de canto ao hover */
+.page-corner--next::after,
+.page-corner--prev::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.page-corner--next::after {
+  right: 0;
+  background: linear-gradient(225deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  clip-path: polygon(100% 50%, 100% 100%, 30% 100%);
+  transition: clip-path 220ms ease;
+}
+
+.page-corner--prev::after {
+  left: 0;
+  background: linear-gradient(315deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  clip-path: polygon(0% 50%, 70% 100%, 0% 100%);
+  transition: clip-path 220ms ease;
+}
+
+.page-corner--next:hover::after {
+  clip-path: polygon(100% 30%, 100% 100%, 10% 100%);
+}
+
+.page-corner--prev:hover::after {
+  clip-path: polygon(0% 30%, 90% 100%, 0% 100%);
+}
+
+/* ── Page Turn — virada realista ───────────────────────────────────────── */
 .page-turn {
   position: absolute;
   inset: 0;
@@ -941,39 +999,54 @@ h4 {
   display: none;
   border-radius: 6px;
   pointer-events: none;
+  /* Perspectiva para profundidade 3D */
   transform-style: preserve-3d;
 }
 
-.page-turn::before,
+/* FACE FRONTAL — a página que está sendo virada */
+.page-turn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  border-radius: 0 6px 6px 0;
+  /* Papel com gradiente de luz — mais claro perto da dobra */
+  background:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.22)  0%,      /* sombra profunda na dobra */
+      rgba(255,255,255,0.18) 4%,     /* brilho da dobra */
+      rgba(0, 0, 0, 0.04)  18%,      /* papel liso */
+      rgba(0, 0, 0, 0.0)   100%
+    ),
+    linear-gradient(160deg, #e8e4d8, #d4cfc0);
+}
+
+/* VERSO DA PÁGINA — o que aparece enquanto a folha vira */
 .page-turn::after {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 54%;
-  border-radius: 0 6px 6px 0;
+  right: 0;
+  width: 100%;
   transform-origin: left center;
+  transform: rotateY(180deg);
   backface-visibility: hidden;
-}
-
-.page-turn::before {
-  right: 0;
+  border-radius: 0 6px 6px 0;
+  /* Verso é mais fosco, levemente diferente */
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.62) 42%, rgba(20, 24, 44, 0.34)),
-    linear-gradient(135deg, rgba(223, 255, 25, 0.15), rgba(255, 255, 255, 0.16), rgba(9, 12, 26, 0.24));
-  box-shadow:
-    -18px 0 26px rgba(0, 0, 0, 0.28),
-    inset 22px 0 34px rgba(255, 255, 255, 0.26),
-    inset -20px 0 28px rgba(0, 0, 0, 0.22);
-}
-
-.page-turn::after {
-  right: 0;
-  background:
-    radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.5), transparent 42%),
-    linear-gradient(100deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.4), rgba(15, 19, 39, 0.48));
-  opacity: 0.75;
-  filter: blur(0.3px);
+    linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.2)   0%,
+      rgba(255,255,255,0.1) 5%,
+      rgba(0, 0, 0, 0.0)   30%
+    ),
+    linear-gradient(160deg, #dedad0, #c8c4b4);
 }
 
 .page-turn.turn-forward,
@@ -981,96 +1054,135 @@ h4 {
   display: block;
 }
 
+/* Virada para frente — página vira da direita para esquerda */
 .page-turn.turn-forward::before {
-  animation: pageFlipForward 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: curlForward 680ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .page-turn.turn-forward::after {
-  animation: pageSheenForward 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: curlForward 680ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
+/* Virada para trás — página vira da esquerda para direita */
 .page-turn.turn-backward::before,
 .page-turn.turn-backward::after {
-  left: 0;
   right: auto;
-  border-radius: 6px 0 0 6px;
+  left: 0;
   transform-origin: right center;
+  border-radius: 6px 0 0 6px;
+}
+
+.page-turn.turn-backward::after {
+  transform: rotateY(-180deg);
 }
 
 .page-turn.turn-backward::before {
-  animation: pageFlipBackward 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: curlBackward 680ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
 .page-turn.turn-backward::after {
-  animation: pageSheenBackward 480ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: curlBackward 680ms cubic-bezier(0.4, 0, 0.2, 1) both;
 }
 
-/* Página em si — fade + deslize suave */
+/* Sombra projetada pela página sendo virada */
+.page-turn.turn-forward .page-turn-shadow,
+.page-turn.turn-backward .page-turn-shadow {
+  position: absolute;
+  top: 0; bottom: 0;
+  pointer-events: none;
+}
+
+/* Nova página entrando — fade suave sem deslize brusco */
 .album-page.is-active {
-  animation: pageReveal 360ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: pageAppear 420ms ease-out both;
 }
 
-@keyframes pageReveal {
-  from {
-    opacity: 0;
-    transform: translateX(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+/* ── Keyframes de virada ───────────────────────────────────────────────── */
 
-@keyframes pageFlipForward {
+@keyframes curlForward {
   0% {
-    opacity: 0;
-    clip-path: polygon(100% 0, 100% 100%, 100% 100%, 100% 0);
+    transform: rotateY(0deg);
+    /* Começa colada à página, só a borda direita visível */
+    clip-path: polygon(
+      98% 0%, 100% 0%, 100% 100%, 98% 100%
+    );
   }
-  10% {
-    opacity: 1;
-    clip-path: polygon(30% 0, 100% 0, 100% 100%, 22% 100%);
+  8% {
+    /* Canto começa a levantar */
+    clip-path: polygon(
+      60% 0%,  100% 0%, 100% 100%, 55% 100%
+    );
   }
-  60% {
-    transform: rotateY(-32deg);
-    clip-path: polygon(0 0, 100% 2%, 94% 98%, 0 100%);
+  35% {
+    /* Metade da página levantada — linha de dobra curva */
+    transform: rotateY(-42deg);
+    clip-path: polygon(
+      0%  0%,
+      100% 1%,
+      97%  25%,
+      94%  50%,   /* ponto mais curvado — meio da página */
+      97%  75%,
+      100% 99%,
+      0%  100%
+    );
+  }
+  65% {
+    /* Passando da metade — página quase paralela */
+    transform: rotateY(-105deg);
+    clip-path: polygon(
+      0%  0%,
+      40%  2%,
+      20%  50%,   /* curva ainda visível */
+      40%  98%,
+      0%  100%
+    );
   }
   100% {
-    opacity: 0;
-    transform: rotateY(-90deg);
-    clip-path: polygon(0 0, 18% 0, 12% 100%, 0 100%);
+    /* Página completamente virada */
+    transform: rotateY(-180deg);
+    clip-path: polygon(0% 0%, 2% 0%, 2% 100%, 0% 100%);
   }
 }
 
-@keyframes pageSheenForward {
-  0%, 100% { opacity: 0; }
-  30%       { opacity: 0.45; transform: translateX(-20px); }
-  65%       { opacity: 0.2;  transform: translateX(-80px); }
-}
-
-@keyframes pageFlipBackward {
+@keyframes curlBackward {
   0% {
-    opacity: 0;
-    clip-path: polygon(0 0, 0 100%, 0 100%, 0 0);
+    transform: rotateY(0deg);
+    clip-path: polygon(0% 0%, 2% 0%, 2% 100%, 0% 100%);
   }
-  10% {
-    opacity: 1;
-    clip-path: polygon(0 0, 70% 0, 78% 100%, 0 100%);
+  8% {
+    clip-path: polygon(0% 0%, 40% 0%, 45% 100%, 0% 100%);
   }
-  60% {
-    transform: rotateY(32deg);
-    clip-path: polygon(0 2%, 100% 0, 100% 100%, 6% 98%);
+  35% {
+    transform: rotateY(42deg);
+    clip-path: polygon(
+      0%  1%,
+      100% 0%,
+      100% 100%,
+      0%  99%,
+      3%   75%,
+      6%   50%,
+      3%   25%
+    );
+  }
+  65% {
+    transform: rotateY(105deg);
+    clip-path: polygon(
+      60%  2%,
+      100% 0%,
+      100% 100%,
+      60%  98%,
+      80%  50%
+    );
   }
   100% {
-    opacity: 0;
-    transform: rotateY(90deg);
-    clip-path: polygon(82% 0, 100% 0, 100% 100%, 88% 100%);
+    transform: rotateY(180deg);
+    clip-path: polygon(98% 0%, 100% 0%, 100% 100%, 98% 100%);
   }
 }
 
-@keyframes pageSheenBackward {
-  0%, 100% { opacity: 0; }
-  30%       { opacity: 0.45; transform: translateX(20px); }
-  65%       { opacity: 0.2;  transform: translateX(80px); }
+@keyframes pageAppear {
+  from { opacity: 0.3; }
+  to   { opacity: 1; }
 }
 
 .cover-page {
