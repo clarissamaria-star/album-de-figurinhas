@@ -48,6 +48,7 @@ Secoes:
 - Marcos de progresso de diamantes: 20%, 40%, 60%, 80%, 100%.
 - Barra de progresso geral.
 - Lista de missoes.
+- Album paginado na aba Figurinhas.
 
 ## Missao: Evento Esportivo
 
@@ -134,6 +135,37 @@ Status:
 - `unowned`
 - `claimed`
 
+## Aba Figurinhas
+
+A aba Figurinhas deve mostrar o album que o usuario esta preenchendo.
+
+Regras atuais:
+
+- Pagina 0 e capa.
+- Paginas 1 a 16 sao paginas do miolo.
+- Cada pagina do miolo tem 9 posicoes.
+- O contador segue intervalos: `1-9`, `10-18`, `19-27`, etc.
+- A pagina 16 mostra o restante ate `141`.
+- A figurinha conquistada aparece preenchida.
+- Figurinhas nao conquistadas aparecem bloqueadas/cinzas.
+- Slider e setas mudam a pagina.
+- Ao trocar de pagina, uma camada visual simula folha virando como livro.
+
+Temas ja mapeados:
+
+| Pagina | Tema |
+|---:|---|
+| 1 | Copa 2026 |
+| 2 | Tatu do Bem |
+| 3 | Spaceman |
+| 4 | Soccer Strike |
+| 5 | Ronaldinho Streetball |
+| 6 | JetX |
+| 7 | Gates of Olympus |
+| 8 | Football X |
+| 9 | Duck Hunters |
+| 10 | Big Bass Bonanza |
+
 ## Check-in Diario
 
 Regras sugeridas:
@@ -142,12 +174,24 @@ Regras sugeridas:
 - 1 check-in por dia.
 - Recompensa padrao: 1 pacote ou 1 figurinha aleatoria.
 - Progresso preservado se o usuario perder um dia, se essa for a regra comercial.
+- A lista mostra cards completos, nao apenas texto simples.
+- Cada card exibe `Check-in N`, recompensa, raridade e status.
 
 Status por dia:
 
 - `claimed`
 - `available`
 - `locked`
+
+Campos visuais por dia:
+
+| Campo | Exemplo |
+|---|---|
+| Titulo | Check-in 6 |
+| Recompensa | Figurinhas bonus |
+| Raridade | Bronze, Prata ou Ouro |
+| Quantidade | 01 figurinha |
+| Status | Resgatado, Disponivel ou Bloqueado |
 
 ## Pacotes
 

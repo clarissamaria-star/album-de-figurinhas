@@ -1,102 +1,67 @@
-# Template de Album de Figurinhas
+# App do Album
 
-Este template recria a experiencia do album em codigo proprio, separado em:
+Implementacao frontend estatica do album de figurinhas.
 
-- `index.html`: estrutura dos elementos.
-- `styles.css`: visual do modal, abas, hero, metas, missoes, check-in e figurinhas.
-- `app.js`: troca de abas e renderizacao dos dados de exemplo.
-- `assets/logo.svg`: troque pela logo da sua empresa mantendo o mesmo nome, ou altere o `src`.
-- `assets/banner-album.svg`: troque pelo banner da campanha mantendo o mesmo nome.
+## Arquivos
 
-## Arvore de Componentes
+- `index.html`: estrutura da plataforma, popup do album, popup de missao e miolo do album.
+- `styles.css`: visual da plataforma, modais, check-in, missoes e paginas do album.
+- `app.js`: troca de abas, abertura dos modais, dados simulados, check-in e paginacao das figurinhas.
+- `assets/`: logo, banner e mascote placeholders proprios.
+
+## Fluxo Implementado
 
 ```text
-album-modal
-  album-header
-  tabs
-  hero
-  tab-panel#missions
-    rarity-section
-      milestones
-      progress-row
-    missions-section
-      mission-card
-  tab-panel#checkin
-    checkin-grid
-  tab-panel#stickers
-    filter-pills
-    sticker-grid
+Sidebar
+  -> Album de Figurinhas
+      -> Popup Album Figurinhas 2026
+          -> Aba Missoes
+              -> Evento esportivo
+                  -> Popup de detalhe
+                  -> Desafio Aceito! (/esportes)
+          -> Aba Check-in
+              -> lista de 16 cards de recompensa diaria
+          -> Aba Figurinhas
+              -> capa + paginas 1 a 16
 ```
 
-## Dados Para Integrar
+## Album Paginado
 
-Use um endpoint de bootstrap no seu sistema retornando algo nesse formato:
+O album usa:
 
-```json
-{
-  "totalStickers": 141,
-  "ownedCount": 1,
-  "progress": 0,
-  "pendingPacksCount": 0,
-  "missions": [
-    {
-      "id": "sports-event",
-      "title": "Evento esportivo",
-      "rewardLabel": "01 pacote",
-      "completed": false
-    }
-  ],
-  "checkin": {
-    "totalDays": 16,
-    "claimedCount": 1,
-    "canClaimDaily": false
-  },
-  "stickers": [
-    {
-      "id": "B-001",
-      "name": "Cidade sede",
-      "rarity": "Bronze",
-      "status": "claimed"
-    }
-  ]
-}
+- pagina `0`: capa;
+- paginas `1..16`: conteudo;
+- `9` figurinhas por pagina;
+- total visual de `141` figurinhas;
+- uma figurinha inicial marcada como conquistada;
+- contador de progresso no topo;
+- slider e setas de navegacao.
+
+Os dados das figurinhas e temas das paginas ficam em `app.js`:
+
+- `bronzeNames`
+- `silverNames`
+- `goldNames`
+- `diamondNames`
+- `pageThemes`
+
+## Integracao Futura
+
+Substituir os dados simulados por resposta do backend:
+
+```text
+GET /api/album/bootstrap
 ```
 
-## Cores Principais
+O backend deve retornar:
 
-Troque as variaveis no topo do `styles.css` para sua marca:
+- total de figurinhas;
+- figurinhas conquistadas;
+- pacotes pendentes;
+- check-in;
+- missoes;
+- progresso geral.
 
-```css
-:root {
-  --bg: #080a16;
-  --panel: #171a31;
-  --panel-2: #242743;
-  --accent: #e4ff15;
-  --accent-2: #38d7b4;
-  --orange: #e86f1f;
-}
-```
+## Marca
 
-## Trocar Marca e Banners
-
-O HTML ja aponta para estes arquivos:
-
-```html
-<img src="assets/logo.svg" alt="Sabiá Gaming">
-<section class="hero" style="--hero-banner: url('assets/banner-album.svg')">
-```
-
-Para colocar a marca real, substitua:
-
-- `assets/logo.svg`
-- `assets/banner-album.svg`
-
-Se o banner for `.png` ou `.webp`, altere apenas o caminho em `--hero-banner`.
-
-## Regras de UI
-
-- `data-tab` no botao precisa bater com o `id` do `.tab-panel`.
-- `.is-active` mostra a aba/painel atual.
-- `.is-owned` mostra figurinha conquistada.
-- `.is-claimed` destaca dia de check-in coletado.
-- O progresso visual fica em `.progress-track span` usando `width: N%`.
+Troque os arquivos em `assets/` pelos materiais finais da Sabia Gaming, mantendo os mesmos nomes quando possivel.
